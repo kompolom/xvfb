@@ -1,5 +1,5 @@
 FROM node:13.13.0-slim
-RUN apt update && apt install -y \
+RUN apt update && apt install --no-install-recommends --no-install-suggests --yes --quiet \
     gosu \
     git \
     bzip2 \
@@ -9,5 +9,7 @@ RUN apt update && apt install -y \
     libxtst6 \
     libxss1 \
     libnss3 \
-    xvfb && rm -rf /var/lib/apt/lists/*
-COPY start-xvfb.sh /
+    xvfb && apt clean && rm -rf /var/lib/apt/lists/*
+
+COPY docker-entrypoint.sh /usr/local/bin/
+CMD [ "bash" ]
