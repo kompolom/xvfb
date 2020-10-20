@@ -1,5 +1,6 @@
 FROM node:13.13.0-slim
-RUN apt update && apt install --no-install-recommends --no-install-suggests --yes --quiet \
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests --yes --quiet \
+    ca-certificates \
     gosu \
     git \
     bzip2 \
@@ -9,7 +10,7 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests --ye
     libxtst6 \
     libxss1 \
     libnss3 \
-    xvfb && apt clean && rm -rf /var/lib/apt/lists/*
+    xvfb && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY docker-entrypoint.sh /usr/local/bin/
 CMD [ "bash" ]
